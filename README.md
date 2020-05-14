@@ -76,3 +76,7 @@ using (var client = new HttpClient())
 }
 await turnContext.SendActivityAsync(responseBody);
 ```            
+
+## ADO Access and Security
+
+Since we will be using user impersonation, all access and security settings are managed from ADO.
