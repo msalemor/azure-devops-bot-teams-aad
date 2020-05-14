@@ -22,6 +22,12 @@ Configuration between Azure Bot, Azure DevOps, Teams and Active Directory. Based
   - Copy the tenant id, client ID, password
   - For the scope enter: ```499b84ac-1321-427f-aa17-267ca6975798/.user_impersonation```
 
+## Bot Emulator Configuration
+
+- Configure ngrock
+  - Bypass for local addresses
+- check: ```Use a sign-in verification code for OAuthCards```
+
 ## Code configuration:
 
 In the appsettings.json enter:
