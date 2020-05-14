@@ -20,7 +20,7 @@ Configuration between Azure Bot, Azure DevOps, Teams and Active Directory. Based
   - Name the connection
   - Select AAD v2
   - Copy the tenant id, client ID, password
-  - For the scope enter: ```499b84ac-1321-427f-aa17-267ca6975798/.default```
+  - For the scope enter: ```499b84ac-1321-427f-aa17-267ca6975798/.user_impersonation```
 
 ## Code configuration:
 
