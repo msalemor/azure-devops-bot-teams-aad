@@ -1,5 +1,8 @@
 # bot-azure-devops-teams-aad
-Configuration between Azure Bot, Azure DevOps, Teams and Active Directory
+
+Configuration between Azure Bot, Azure DevOps, Teams and Active Directory. Based on this document:
+
+- https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=aadv1%2Ccsharp
 
 ## Requirements
 
@@ -28,20 +31,22 @@ In the appsettings.json enter:
   "MicrosoftAppPassword": "<--MicrosoftAppPwd-->",
   "ConnectionName": "<--Name of the connection-->"
 }
-
 ```
 
 ## Client call to Azure DevOps
 
 ```c#
+public static async Task ListAsync(ITurnContext turnContext, TokenResponse tokenResponse)
+{
+string responseBody = string.Empty;
 using (var client = new HttpClient())
 {
-    client.BaseAddress = new Uri(azureDevOpsOrganizationUrl);
+    client.BaseAddress = new Uri("https://amxsoft.visualstudio.com");
     client.DefaultRequestHeaders.Accept.Clear();
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-    client.DefaultRequestHeaders.Add("User-Agent", "ManagedClientConsoleAppSample");
+    client.DefaultRequestHeaders.Add("User-Agent", "BotAgentCode");
     client.DefaultRequestHeaders.Add("X-TFS-FedAuthRedirect", "Suppress");
-    client.DefaultRequestHeaders.Authorization = authHeader;
+    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenResponse.Token);
 
     // connect to the REST endpoint            
     HttpResponseMessage response = client.GetAsync("_apis/projects?stateFilter=All&api-version=2.2").Result;
@@ -49,9 +54,9 @@ using (var client = new HttpClient())
     // check to see if we have a succesfull respond
     if (response.IsSuccessStatusCode)
     {
-        Console.WriteLine("\tSuccesful REST call");
-        var result = response.Content.ReadAsStringAsync().Result;
-        Console.WriteLine(result);
+        Debug.WriteLine("\tSuccesful REST call");
+        responseBody = response.Content.ReadAsStringAsync().Result;
+        Debug.WriteLine(responseBody);
     }
     else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
     {
@@ -59,7 +64,8 @@ using (var client = new HttpClient())
     }
     else
     {
-        Console.WriteLine("{0}:{1}", response.StatusCode, response.ReasonPhrase);
+        Debug.WriteLine("{0}:{1}", response.StatusCode, response.ReasonPhrase);
     }
 }
+await turnContext.SendActivityAsync(responseBody);
 ```            
