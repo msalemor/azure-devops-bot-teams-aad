@@ -12,14 +12,14 @@ Configuration between Azure Bot, Azure DevOps, Teams and Active Directory. Based
 
 ## Bot Configuration
 
-- Deploy a bot in Azure and record the MicrosoftID and Password from the settings
-- Create a Service Principal with a secret and delegated permission to Azure Devops
+1. Deploy a bot in Azure and record the MicrosoftID and Password from the settings
+2. Create a Service Principal with a secret and delegated permission to Azure Devops
   - Record the Client ID, Password, Tenant ID
   - Set the reply URI to: ```https://token.botframework.com/.auth/web/redirect```
-- Go into Bot settings and create an OUATH connaction
+3. Go into Bot settings and create an OAuth Connection Settings
   - Name the connection
   - Select AAD v2
-  - Copy the tenant id, client ID, password
+  - Copy the tenant id, client ID, password from step 2
   - For the scope enter: ```499b84ac-1321-427f-aa17-267ca6975798/.user_impersonation```
 
 ## Bot Emulator Configuration
