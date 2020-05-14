@@ -1,4 +1,4 @@
-# bot-azure-devops-teams-aad
+# Azure DevOps Bot in Teams Channel
 
 Configuration between Azure Bot, Azure DevOps, Teams and Active Directory. Based on this document:
 
