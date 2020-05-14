@@ -15,7 +15,7 @@ Configuration between Azure Bot, Azure DevOps, Teams and Active Directory. Based
 - Deploy a bot in Azure and record the MicrosoftID and Password from the settings
 - Create a Service Principal with a secret and delegated permission to Azure Devops
   - Record the Client ID, Password, Tenant ID
-  - Set the reply URI to: ```https://token.botframework.com/.auth/web/redirect``
+  - Set the reply URI to: ```https://token.botframework.com/.auth/web/redirect```
 - Go into Bot settings and create an OUATH connaction
   - Name the connection
   - Select AAD v2
